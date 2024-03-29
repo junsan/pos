@@ -19,11 +19,11 @@
         </thead>
         <tbody>
             @foreach($products as $product)
-                <tr>
+                <tr> 
                     <th scope="row">{{ $product->id }}</th>
                     <td>{{ ucfirst($product->name) }}</td>
                     <td>{{ $product->description }}</td>
-                    <td>{{ number_format($product->price, 2, '.', '');  }}</td>
+                    <td>{{ 'Php '.number_format($product->price, 2, '.', '');  }}</td>
                     <td>
                         <div class="d-flex">
                             <button class="btn btn-sm btn-success" style="margin-right: 10px">Edit</button>    
