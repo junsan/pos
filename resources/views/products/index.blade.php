@@ -5,7 +5,7 @@
     <div class="col-md-9">
     <div class="d-flex justify-content-between">
         <h2>All Products</h2>
-        <button class="btn btn-success">Create</button>
+        <a href="{{ route('products.create') }}" class="btn btn-success">Create</a>
     </div>
     <table class="table table-striped mt-3">
         <thead>
