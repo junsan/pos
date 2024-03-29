@@ -62,17 +62,34 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Product $product)
     {
-        //
+        $categories = Category::all();
+        return view('products.edit', compact('product', 'categories'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Product $product)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:255',
+            'description' => 'required',
+            'category_id' => 'required',
+            'price' => 'required'
+        ]);
+
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->category_id = $request->category_id;
+        $product->price = $request->price;
+        $product->status = 1;
+        $product->image = 'placeholder';
+
+        $product->save();
+
+        return redirect()->route('products.index');
     }
 
     /**

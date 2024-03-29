@@ -2,32 +2,28 @@
 
 @section('content')
 <div class="row">
-    <div class="col-md-9">
+    <div class="col-md-8">
     <div class="d-flex justify-content-between">
-        <h2>All Products</h2>
-        <a href="{{ route('products.create') }}" class="btn btn-success">Create</a>
+        <h2>All Categories</h2>
+        <a href="{{ route('categories.create') }}" class="btn btn-success">Create</a>
     </div>
     <table class="table table-striped mt-3">
         <thead>
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Name</th>
-                <th scope="col">Description</th>
-                <th scope="col">Price</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($products as $product)
+            @foreach($categories as $category)
                 <tr> 
-                    <th scope="row">{{ $product->id }}</th>
-                    <td>{{ ucfirst($product->name) }}</td>
-                    <td>{{ $product->description }}</td>
-                    <td>{{ 'Php '.number_format($product->price, 2, '.', '');  }}</td>
+                    <th scope="row">{{ $category->id }}</th>
+                    <td>{{ ucfirst($category->name) }}</td>
                     <td>
                         <div class="d-flex">
-                            <a href="{{ route('products.edit', $product->id) }}" class="btn btn-sm btn-success" style="margin-right: 5px">Edit</a>    
-                            <form action="{{ route('products.destroy', $product->id) }}" method="POST">
+                            <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-sm btn-success" style="margin-right: 5px">Edit</a>    
+                            <form action="{{ route('categories.destroy', $category->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-danger">Delete</button>
