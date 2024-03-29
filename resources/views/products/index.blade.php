@@ -1,55 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>POS</title>
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">POS</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="#">Categories</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
-                </li>
-                <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Products
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Products</a></li>
-                    <li><a class="dropdown-item" href="#">Product Combos</a></li>
-                </ul>
-                </li>
-            </ul>
-            </div>
-        </div>
-    </nav>
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-8">
-                <ol class="list-group list-group-numbered">
-                    @foreach($products as $product)
-                        <li class="list-group-item">
-                            {{ ucfirst($product['name']) }}
-                            <p>{{ $product['description'] }}</p>
-                        </li>
-                    @endforeach
-                </ol>
-            </div>
-        </div>
+@extends('layouts.master')
+
+@section('content')
+<div class="row">
+    <div class="col-md-9">
+    <div class="d-flex justify-content-between">
+        <h2>All Products</h2>
+        <button class="btn btn-success">Create</button>
     </div>
-</body>
-</html>
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Price</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($products as $product)
+                <tr>
+                    <th scope="row">{{ $product->id }}</th>
+                    <td>{{ ucfirst($product->name) }}</td>
+                    <td>{{ $product->description }}</td>
+                    <td>{{ number_format($product->price, 2, '.', '');  }}</td>
+                    <td>
+                        <div class="d-flex">
+                            <button class="btn btn-sm btn-success" style="margin-right: 10px">Edit</button>    
+                            <button class="btn btn-sm btn-danger">Delete</button>
+                        <div>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+        </table>
+    </div>
+</div>
+
+@endsection
